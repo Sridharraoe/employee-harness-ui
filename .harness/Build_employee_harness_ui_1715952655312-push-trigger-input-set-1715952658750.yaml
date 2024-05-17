@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_employee_harness_ui_1715952655312-push-trigger-input-set
+  identifier: Build_employee_harness_ui_1715952655312pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: employee
+  pipeline:
+    identifier: Build_employee_harness_ui_1715952655312
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
