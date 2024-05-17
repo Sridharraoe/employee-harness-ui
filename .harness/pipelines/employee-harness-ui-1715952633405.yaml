@@ -15,15 +15,17 @@ pipeline:
         name: build
         spec:
           caching:
-            enabled: false
+            enabled: true
           cloneCodebase: true
           execution:
             steps:
               - step:
                   type: Run
-                  identifier: build_angular_app
-                  name: Build Angular App
+                  name: build
+                  identifier: build
                   spec:
+                    connectorRef: account.harnessImage
+                    image: node:18.14.2
                     shell: Sh
                     command: |-
                       echo "Welcome to Harness CI"
