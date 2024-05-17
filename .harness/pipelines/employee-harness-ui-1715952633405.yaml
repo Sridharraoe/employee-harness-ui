@@ -15,7 +15,7 @@ pipeline:
         name: build
         spec:
           caching:
-            enabled: true
+            enabled: false
           cloneCodebase: true
           execution:
             steps:
@@ -32,7 +32,7 @@ pipeline:
                       node --version
                       npm install
                       npm run build --if-present
-                      npm test
+                      npm test -- --watch=false --browsers=ChromeHeadless
           platform:
             arch: Amd64
             os: Linux
