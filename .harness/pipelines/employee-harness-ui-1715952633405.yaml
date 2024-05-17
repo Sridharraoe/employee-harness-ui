@@ -15,14 +15,14 @@ pipeline:
         name: build
         spec:
           caching:
-            enabled: true
+            enabled: false
           cloneCodebase: true
           execution:
             steps:
               - step:
                   type: Run
-                  identifier: build_javascript_app
-                  name: Build JavaScript App
+                  identifier: build_angular_app
+                  name: Build Angular App
                   spec:
                     shell: Sh
                     command: |-
