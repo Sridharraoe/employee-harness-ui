@@ -27,7 +27,7 @@ export class FlagService {
   ) {}
 
   getFlagsData() {
-    debugger;
+    // debugger;
     return this.httpClient
       .get<Flag[]>(this.flagsUrl, this.httpOptions)
       .pipe(retry(3), catchError(this.httpErrorHandler));

@@ -17,9 +17,14 @@ import { Flag } from './flag';
 export class AppComponent implements OnInit {
   title = 'employee';
 
+  id: number | any;
+
   constructor(private flagService: FlagService) {}
   ngOnInit(): void {
     this.getFlags();
+    this.id = setInterval(() => {
+      this.getFlags();
+    }, 5000);
   }
 
   condition!: boolean;
@@ -51,6 +56,11 @@ export class AppComponent implements OnInit {
       );
       console.log(this.isCrud);
     });
+  }
+  ngOnDestroy() {
+    if (this.id) {
+      clearInterval(this.id);
+    }
   }
 
   // getFlags() {

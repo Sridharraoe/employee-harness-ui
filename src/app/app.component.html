@@ -11,7 +11,7 @@
     <div class="matbutton" *ngIf="isCrud">
       <button mat-flat-button color="primary">Add Employee</button>
     </div>
-  <div>
+  <div *ngIf="isEmpList">
     <app-employees></app-employees>
   </div>
 </div>

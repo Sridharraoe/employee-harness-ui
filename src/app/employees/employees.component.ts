@@ -15,6 +15,7 @@ export class EmployeesComponent {
     'salary',
   ];
   employees: any;
+  id: number | any;
 
   constructor(private restService: EmployeeServcieService) {
     this.employees = [];
@@ -22,9 +23,9 @@ export class EmployeesComponent {
 
   ngOnInit() {
     this.getEmployeeData();
-    //   setInterval(() => {
-    //    this.getEmployeeData();
-    //    }, 3000);
+    // this.id = setInterval(() => {
+    //   this.getEmployeeData();
+    // }, 5000);
   }
 
   getEmployeeData() {
@@ -34,7 +35,9 @@ export class EmployeesComponent {
     });
   }
 
-  ngOnDestroy() {
-    clearInterval(this.employees);
-  }
+  // ngOnDestroy() {
+  //   if (this.id) {
+  //     clearInterval(this.id);
+  //   }
+  // }
 }
