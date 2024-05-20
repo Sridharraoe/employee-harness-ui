@@ -30,10 +30,9 @@ pipeline:
                     command: |-
                       echo "Welcome to Harness CI"
                       node --version
-                      which google-chrome
                       npm install
                       npm run build --if-present
-                      npm test -- --watch=false --browsers=ChromeHeadless
+                      npm test
           platform:
             arch: Amd64
             os: Linux
