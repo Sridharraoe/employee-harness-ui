@@ -30,6 +30,7 @@ pipeline:
                     command: |-
                       echo "Welcome to Harness CI"
                       node --version
+                      export CHROME_BIN=~/.local/share/flatpak/app/com.google.Chrome/current/active/export/bin/com.google.Chrome
                       npm install
                       npm run build --if-present
                       npm test -- --watch=false --browsers=ChromeHeadless
