@@ -30,6 +30,10 @@ pipeline:
                     command: |-
                       echo "Welcome to Harness CI"
                       node --version
+                      wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+                      echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+                      apt-get update
+                      apt-get install -y google-chrome-stable xvfb
                       npm install
                       npm run build --if-present
                       npm test -- --watch=false --browsers=ChromeHeadless
