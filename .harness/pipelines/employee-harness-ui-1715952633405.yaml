@@ -47,7 +47,7 @@ pipeline:
                         errors:
                           - AllErrors
                         action:
-                          type: Abort
+                          type: MarkAsFailure
           platform:
             os: Linux
             arch: Amd64
@@ -56,3 +56,26 @@ pipeline:
             spec: {}
         type: CI
         description: ""
+    - stage:
+        name: testff
+        identifier: testff
+        description: ""
+        type: FeatureFlag
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: FlagConfiguration
+                  name: FlagConfiguration_1
+                  identifier: FlagConfiguration_1
+                  spec:
+                    feature: failure_test
+                    environment: dev
+                    instructions:
+                      - identifier: SetFeatureFlagStateIdentifier
+                        type: SetFeatureFlagState
+                        spec:
+                          state: "off"
+                  timeout: 10m
+                  when:
+                    stageStatus: Failure
