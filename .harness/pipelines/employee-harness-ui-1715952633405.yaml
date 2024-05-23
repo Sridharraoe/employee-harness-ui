@@ -33,12 +33,6 @@ pipeline:
                       npm install
                       npm run build --if-present
                       npm test -- --watch=false --browsers=ChromeHeadless
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - AllErrors
-                        action:
-                          type: Abort
                   description: building application and running test cases
           platform:
             os: Linux
@@ -47,3 +41,27 @@ pipeline:
             type: Cloud
             spec: {}
         type: CI
+        description: ""
+    - stage:
+        name: testff
+        identifier: testff
+        description: ""
+        type: FeatureFlag
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: FlagConfiguration
+                  name: FlagConfiguration_1
+                  identifier: FlagConfiguration_1
+                  spec:
+                    feature: failure_test
+                    environment: dev
+                    instructions:
+                      - identifier: SetFeatureFlagStateIdentifier
+                        type: SetFeatureFlagState
+                        spec:
+                          state: "on"
+                  timeout: 10m
+                  when:
+                    stageStatus: Failure
