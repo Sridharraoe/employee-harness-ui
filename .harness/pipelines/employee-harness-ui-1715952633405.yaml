@@ -32,7 +32,6 @@ pipeline:
                       node --version
                       npm install
                       npm run build --if-present
-                      npm test -- --watch=false --browsers=ChromeHeadless
           platform:
             os: Linux
             arch: Amd64
@@ -40,33 +39,56 @@ pipeline:
             type: Cloud
             spec: {}
         type: CI
-    - stage:
-        name: testbuild
-        identifier: testbuild
-        description: ""
-        type: CI
-        spec:
-          cloneCodebase: true
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
-          execution:
-            steps:
-              - step:
-                  type: Run
-                  name: Run_1
-                  identifier: Run_1
-                  spec:
-                    shell: Sh
-                    command: echo "test cases status"
-        when:
-          pipelineStatus: Failure
-        failureStrategies:
-          - onFailure:
-              errors:
-                - AllErrors
-              action:
-                type: Abort
+    - parallel:
+        - stage:
+            name: execute testcases
+            identifier: execute_testcases
+            description: ""
+            type: CI
+            spec:
+              cloneCodebase: true
+              platform:
+                os: Linux
+                arch: Amd64
+              runtime:
+                type: Cloud
+                spec: {}
+              execution:
+                steps:
+                  - step:
+                      type: Run
+                      name: Run test cases
+                      identifier: Run_test_cases
+                      spec:
+                        shell: Sh
+                        command: npm test -- --watch=false --browsers=ChromeHeadless
+        - stage:
+            name: statusCheck
+            identifier: statusCheck
+            description: ""
+            type: CI
+            spec:
+              cloneCodebase: true
+              platform:
+                os: Linux
+                arch: Amd64
+              runtime:
+                type: Cloud
+                spec: {}
+              execution:
+                steps:
+                  - step:
+                      type: Run
+                      name: Run_1
+                      identifier: Run_1
+                      spec:
+                        shell: Sh
+                        command: echo "checking the status"
+            when:
+              pipelineStatus: Failure
+            failureStrategies:
+              - onFailure:
+                  errors:
+                    - AllErrors
+                  action:
+                    type: Abort
