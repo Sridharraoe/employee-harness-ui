@@ -57,25 +57,30 @@ pipeline:
         type: CI
         description: ""
     - stage:
-        name: testff
-        identifier: testff
+        name: test
+        identifier: test
         description: ""
-        type: FeatureFlag
+        type: Custom
         spec:
+          environment:
+            environmentRef: dev
+            deployToAll: false
           execution:
             steps:
               - step:
-                  type: FlagConfiguration
-                  name: FlagConfiguration_1
-                  identifier: FlagConfiguration_1
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
                   spec:
-                    feature: failure_test
-                    environment: dev
-                    instructions:
-                      - identifier: SetFeatureFlagStateIdentifier
-                        type: SetFeatureFlagState
-                        spec:
-                          state: "off"
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo "reverting"
+                    environmentVariables: []
+                    outputVariables: []
                   timeout: 10m
-                  when:
-                    stageStatus: Failure
+        tags: {}
+        when:
+          pipelineStatus: Failure
