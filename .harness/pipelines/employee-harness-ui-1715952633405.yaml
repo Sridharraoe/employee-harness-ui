@@ -38,6 +38,8 @@ pipeline:
                   name: Test cases
                   identifier: Test_cases
                   spec:
+                    connectorRef: account.harnessImage
+                    image: node:18.14.2
                     shell: Sh
                     command: npm test -- --watch=false --browsers=ChromeHeadless
                   failureStrategies:
