@@ -34,38 +34,22 @@ pipeline:
                       npm run build --if-present
                       npm test -- --watch=false --browsers=ChromeHeadless
           platform:
-            arch: Amd64
-            os: Linux
-          runtime:
-            spec: {}
-            type: Cloud
-        type: CI
-    - stage:
-        name: testCases
-        identifier: testCases
-        description: ""
-        type: CI
-        spec:
-          cloneCodebase: true
-          platform:
             os: Linux
             arch: Amd64
           runtime:
             type: Cloud
             spec: {}
-          execution:
-            steps:
-              - step:
-                  type: Run
-                  name: Run_1
-                  identifier: Run_1
-                  spec:
-                    shell: Sh
-                    command: echo "Checking test case status"
+        type: CI
         when:
           pipelineStatus: Failure
         failureStrategies:
           - onFailure:
               errors: []
               action:
-                type: MarkAsFailure
+                type: Retry
+                spec:
+                  retryCount: 1
+                  retryIntervals: []
+                  onRetryFailure:
+                    action:
+                      type: Abort
