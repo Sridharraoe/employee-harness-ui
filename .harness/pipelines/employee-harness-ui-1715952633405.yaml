@@ -41,7 +41,19 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: node:18.14.2
                     shell: Sh
-                    command: npm test -- --watch=false --browsers=ChromeHeadless
+                    command: |-
+                      #!/bin/bash
+                      # from https://chromium.woolyss.com/
+                      # and https://gist.github.com/addyosmani/5336747
+                      # and https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md
+                      sudo apt-get update
+                      sudo apt-get install software-properties-common
+                      sudo add-apt-repository ppa:canonical-chromium-builds/stage
+                      sudo apt-get update
+                      sudo apt-get install chromium-browser 
+                      chromium-browser --headless --no-sandbox http://example.org/
+
+                      npm test -- --watch=false --browsers=ChromeHeadless
                   failureStrategies:
                     - onFailure:
                         errors:
