@@ -54,12 +54,6 @@ pipeline:
                       chromium-browser --headless --no-sandbox http://example.org/
 
                       npm test -- --watch=false --browsers=ChromeHeadless
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - AllErrors
-                        action:
-                          type: Abort
           platform:
             os: Linux
             arch: Amd64
