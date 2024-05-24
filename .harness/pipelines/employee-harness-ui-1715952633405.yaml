@@ -54,6 +54,17 @@ pipeline:
                       chromium-browser --headless --no-sandbox http://example.org/
 
                       npm test -- --watch=false --browsers=ChromeHeadless
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: ManualIntervention
+                          spec:
+                            timeout: 15s
+                            onTimeout:
+                              action:
+                                type: MarkAsFailure
           platform:
             os: Linux
             arch: Amd64
