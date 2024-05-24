@@ -56,31 +56,3 @@ pipeline:
             spec: {}
         type: CI
         description: ""
-    - stage:
-        name: test
-        identifier: test
-        description: ""
-        type: Custom
-        spec:
-          environment:
-            environmentRef: dev
-            deployToAll: false
-          execution:
-            steps:
-              - step:
-                  type: ShellScript
-                  name: ShellScript_1
-                  identifier: ShellScript_1
-                  spec:
-                    shell: Bash
-                    executionTarget: {}
-                    source:
-                      type: Inline
-                      spec:
-                        script: echo "reverting"
-                    environmentVariables: []
-                    outputVariables: []
-                  timeout: 10m
-        tags: {}
-        when:
-          pipelineStatus: Failure
