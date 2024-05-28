@@ -38,10 +38,10 @@ export class AppComponent implements OnInit {
       this.flags = res;
       console.log(this.flags);
       console.log(
-        this.flags.find((flag) => flag.identifier === 'employee_display_api')
+        this.flags.find((flag) => flag.identifier === 'employee_list')
       );
       this.isEmpList = Boolean(
-        this.flags.find((flag) => flag.identifier === 'employee_display_api')
+        this.flags.find((flag) => flag.identifier === 'employee_list')
           ?.state == 'on'
           ? true
           : false
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
       console.log(this.isEmpList);
 
       this.isCrud = Boolean(
-        this.flags.find((flag) => flag.identifier === 'testFlag02')?.state ==
+        this.flags.find((flag) => flag.identifier === 'crud_operations')?.state ==
           'on'
           ? true
           : false
