@@ -16,7 +16,7 @@ import { Flag } from './flag';
 })
 export class FlagService {
   private flagsUrl =
-    'https://employee-harness-production.up.railway.app/feature_flag/fetchAll';
+    'https://employee-production-81b8.up.railway.app/feature_flag/fetchAll';
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
