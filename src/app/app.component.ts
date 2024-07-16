@@ -21,9 +21,10 @@ export class AppComponent implements OnInit {
 
   constructor(private flagService: FlagService) {}
   ngOnInit(): void {
-    this.getFlags();
+    // this.getFlags();
+    this.getFlagValues();
     this.id = setInterval(() => {
-      this.getFlags();
+      this.getFlagValues();
     }, 5000);
   }
 
@@ -41,20 +42,32 @@ export class AppComponent implements OnInit {
         this.flags.find((flag) => flag.identifier === 'employee_list')
       );
       this.isEmpList = Boolean(
-        this.flags.find((flag) => flag.identifier === 'employee_list')
-          ?.state == 'on'
+        this.flags.find((flag) => flag.identifier === 'employee_list')?.state ==
+          'on'
           ? true
           : false
       );
       console.log(this.isEmpList);
 
       this.isCrud = Boolean(
-        this.flags.find((flag) => flag.identifier === 'crud_operations')?.state ==
-          'on'
+        this.flags.find((flag) => flag.identifier === 'crud_operations')
+          ?.state == 'on'
           ? true
           : false
       );
       console.log(this.isCrud);
+    });
+  }
+
+  getFlagValues() {
+    this.flagService.findFlagValue('employee_list').subscribe((flagValue) => {
+      console.log(flagValue);
+      this.isEmpList = flagValue;
+    });
+
+    this.flagService.findFlagValue('crud_operations').subscribe((flagValue) => {
+      console.log(flagValue);
+      this.isCrud = flagValue;
     });
   }
   ngOnDestroy() {
