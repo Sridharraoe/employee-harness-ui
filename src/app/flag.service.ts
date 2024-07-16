@@ -22,6 +22,11 @@ export class FlagService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
+  private findFlagUrl =
+    'https://employee-harness-ff-production.up.railway.app/feature_flag/findById?flagId=';
+
+  // 'https://employee-production-81b8.up.railway.app/feature_flag/findById?flagId=';
+
   constructor(
     private httpClient: HttpClient // private errorHandler: GlobalErrorHandler
   ) {}
@@ -30,6 +35,12 @@ export class FlagService {
     // debugger;
     return this.httpClient
       .get<Flag[]>(this.flagsUrl, this.httpOptions)
+      .pipe(retry(3), catchError(this.httpErrorHandler));
+  }
+
+  findFlagValue(flagName: string) {
+    return this.httpClient
+      .get<boolean>(this.findFlagUrl + flagName, this.httpOptions)
       .pipe(retry(3), catchError(this.httpErrorHandler));
   }
 
