@@ -23,7 +23,9 @@ export class FlagService {
   };
 
   private findFlagUrl =
-    'https://employee-harness-ff-production.up.railway.app/feature_flag/findById?flagId=';
+    'https://employee-harness-ff-production.up.railway.app/feature_flag/findById?timestamp=' +
+    Date.now() +
+    '&flagId=';
 
   // 'https://employee-production-81b8.up.railway.app/feature_flag/findById?flagId=';
 
