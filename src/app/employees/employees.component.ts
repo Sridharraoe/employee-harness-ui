@@ -10,9 +10,9 @@ export class EmployeesComponent {
   displayedColumns: string[] = [
     'id',
     'name',
-    'birthDate',
-    'department',
-    'salary',
+    'birthDate'
+ //   'department',
+   // 'salary',
   ];
   employees: any;
   id: number | any;
