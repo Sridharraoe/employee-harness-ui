@@ -1,17 +1,15 @@
 <div>
   <h1 class="employees"> Feature Flags SDK Reference Application- API Management</h1>
 </div>
-<ng-template #elseBlock>
-  <div>
-    <h1> List of APIs-emp microservice</h1>
-  </div>
-</ng-template>
-
+ 
 <div >
     <div class="matbutton" *ngIf="isCrud">
       <button mat-flat-button color="primary">Add New API Specs</button>
     </div>
   <div *ngIf="isEmpList">
+     <div>
+    <h1> List of APIs-emp microservice</h1>
+  </div>
     <app-employees></app-employees>
   </div>
 </div>
